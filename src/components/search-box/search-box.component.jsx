@@ -1,21 +1,15 @@
-import { Component } from "react";
 import "./search-box.styles.css";
 
-export default class SearchBox extends Component {
-    render() {
-        const { onSearchChange } = this;
-        return (
-            <input 
-                className={`search-box ${this.props.className}`}
-                type="search"
-                placeholder="search monsters"
-                onChange={onSearchChange}
-            />
-        );
+const SearchBox = ({ onSearchHandler, className }) => {
+    const classNames = `search-box ${className}`;
+    const onSearchChange = (event) => {
+        const searchValue = event.target.value.toLowerCase();
+        onSearchHandler(searchValue);
     }
 
-    onSearchChange = (event) => {
-        const searchValue = event.target.value.toLowerCase();
-        this.props.onSearchHandler(searchValue);
-    }
+    return (
+        <input className={classNames} type="search" placeholder="search monsters" onChange={onSearchChange} />
+    );
 }
+
+export default SearchBox;
